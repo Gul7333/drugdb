@@ -67,7 +67,7 @@ jobs:
       - name: Build with Next.js (Skip Type Check)
         run: |
           export SKIP_TYPE_CHECK=1
-          ${{ steps.detect-package-manager.outputs.runner }} next build --no-lint
+          ${{ steps.detect-package-manager.outputs.runner }} npx next build --no-lint
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
