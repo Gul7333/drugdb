@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
+import NavigationBar from "../components/NavigationBar";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import Footer from "@/components/Footer";
+import NextBreadcrumb from "@/components/Breadcrumbs";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// const geistSans = localFont({
+//   src: "./fonts/GeistVF.woff",
+//   variable: "--font-geist-sans",
+//   weight: "100 900",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,12 +26,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
+        <NavigationBar />
+        <NextBreadcrumb
+          homeElement={'Home'}
+          separator={<span> > </span>}
+          activeClasses='font-bold'
+          containerClasses='flex' 
+          listClasses='hover:underline mx-2 py4  '
+          capitalizeLinks
+        />
         {children}
+<Footer/>
       </body>
     </html>
   );
