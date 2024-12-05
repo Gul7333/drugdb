@@ -19,7 +19,14 @@ async function fetchDrugs(): Promise<Drug[]> {
   }));
   
 }
-
+export async function generateMetadata(): Promise<Metadata> {
+  
+  
+  return {
+    title: "Drugdb - Latest Concise information of all drugs",
+    description: 'Detail  Information of thousand of medicince (drugs) for medical students, professionals, or ordinary man.Overview, indications, sideeefects of all medicines in one place',
+  };
+}
 export default async function HomePage() {
   const drugs = await fetchDrugs();
 
