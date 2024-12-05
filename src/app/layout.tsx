@@ -34,7 +34,7 @@ export default function RootLayout({
         <NavigationBar />
         <NextBreadcrumb
           homeElement={'Home'}
-          separator={<span> > </span>}
+          separator={<span> | </span>}
           activeClasses='font-bold'
           containerClasses='flex' 
           listClasses='hover:underline mx-2 py4  '

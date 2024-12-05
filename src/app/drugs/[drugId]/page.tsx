@@ -1,7 +1,8 @@
 
 import { Metadata } from "next";
-import data from "/public/druginfostore"
+import data from "../../../../public/druginfostore.json"
 import Link from "next/link";
+
 
 
 type Drug = {
@@ -16,25 +17,14 @@ type Drug = {
 };
 
 interface DrugPageProps {
-    params: {
+    params: Promise<{
       drugId: string;
-    };
+    }>;
   }
 
 async function fetchDrug(drugId: string): Promise<Drug> {
-//   const drugs: Drug[] = [
-//     {
-//       id: 1,
-//       brandName: 'Paracetamol',
-//       genericName: 'Acetaminophen',
-//       overview: 'A pain reliever and fever reducer.',
-//       indication: 'Used for mild to moderate pain.',
-//       contraindication: 'Severe liver disease.',
-//       sideEffects: 'Nausea, rash.',
-//       precautions: 'Avoid alcohol.',
-//     },
-//     // Add more drug data here
-//   ];
+
+
   const drug = data[parseInt(drugId)]
   return  {
     id: parseInt(drugId),
@@ -46,24 +36,26 @@ async function fetchDrug(drugId: string): Promise<Drug> {
     contraindication: drug[4],
     precautions: drug[5],
   };
+
 }
+
 
 export async function generateStaticParams() {
   // Get all drug IDs from your data
   const ids = Object.keys(data).map((id) => ({ drugId: id }));
-
   return ids; // [{ drugId: '1' }, { drugId: '2' }, ...]
 }
 
 export async function generateMetadata({ params }: DrugPageProps): Promise<Metadata> {
-  const drug =  await fetchDrug(params.drugId);
+  const id = (await params).drugId
+  const drug : Drug =  await fetchDrug(id);
   return {
     title: drug ? `${drug.brandName} (${drug.genericName}) - Drug Information` : 'Drug Not Found',
     description: drug ? drug.overview : 'Detailed drug information.',
   };
 }
 
-export default async function DrugPage({ params }: DrugPageProps) {
+export default async function DrugPage({ params }) {
   const drug = await fetchDrug(params.drugId);
 
   if (!drug) {

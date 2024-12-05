@@ -1,5 +1,5 @@
 import Link from "next/link";
-import data from "/public/druginfostore";
+import data from "../../public/druginfostore.json";
 import { Metadata } from "next";
 import { ChangeEvent, useMemo, useState } from "react";
 import Search from "@/components/Search";
@@ -12,16 +12,12 @@ type Drug = {
 };
 
 async function fetchDrugs(): Promise<Drug[]> {
-  return data.map((dat: [], idx: number) => ({
+  return data.map((dat, idx: number) => ({
     id: idx,
     genericName: dat[0],//actually 0 index is generic nanme
     indications: dat[2],
   }));
-  return [
-    { id: 1, brandName: "Paracetamol", genericName: "Acetaminophen" },
-    { id: 2, brandName: "Ibuprofen", genericName: "Ibuprofen" },
-    { id: 3, brandName: "Amoxicillin", genericName: "Amoxicillin" },
-  ];
+  
 }
 
 export default async function HomePage() {
