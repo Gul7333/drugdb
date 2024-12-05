@@ -1,6 +1,6 @@
 
 import { Metadata } from "next";
-import data from "../../../../public/druginfostore.json"
+import data from "../../datasourse/druginfostore.json"
 import Link from "next/link";
 
 

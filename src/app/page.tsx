@@ -1,5 +1,5 @@
 import Link from "next/link";
-import data from "../../public/druginfostore.json";
+import data from "./datasourse/druginfostore.json";
 import { Metadata } from "next";
 import { ChangeEvent, useMemo, useState } from "react";
 import Search from "@/components/Search";
